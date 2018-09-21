@@ -3,8 +3,7 @@ FROM ubuntu
 MAINTAINER "Tim Elfelt" <timelf123@gmail.com>
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-#RUN apt-get update && apt-get install -y lib32gcc1 lib32stdc++6 wget net-tools
-RUN dpkg --add-architecture i386; apt-get update;apt-get install -y lib32gcc1 libstdc++6 libstdc++6:i386 libtbb2:i386 libtbb2 wget net-tools binutils libssl1.0.0:i386
+RUN dpkg --add-architecture i386; apt-get update;apt-get install -y python python-dev python-pip python-virtualenv lib32gcc1 libstdc++6 libstdc++6:i386 libtbb2:i386 libtbb2 wget net-tools binutils libssl1.0.0:i386
 
 RUN cd /root \
 	&& wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz \
@@ -25,6 +24,7 @@ EXPOSE 2303/udp
 EXPOSE 2304/udp
 EXPOSE 2305/udp
 
+COPY a3update.py /
 COPY credentials.sh /
 COPY installserver.sh /
 
